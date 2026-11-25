@@ -20,9 +20,9 @@ export async function onRequestPost({ request, env }) {
   const r = await fetch(base(env).api + '/snap/v1/transactions', {
     method: 'POST',
     headers: {
-      'content-type': 'application/json',
-      accept: 'application/json',
-      authorization: auth(env)
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': auth(env)
     },
     body: JSON.stringify({
       transaction_details: {
@@ -40,19 +40,31 @@ export async function onRequestPost({ request, env }) {
     })
   });
 
-  const j = await r.json();
+  const text = await r.text();
 
-  if (!j.token) {
+  try {
+    const j = JSON.parse(text);
+
+    if (!j.token) {
+      return json({
+        status: r.status,
+        midtrans: j,
+        order
+      }, 502);
+    }
+
+    return json({
+      token: j.token,
+      order,
+      clientKey: env.MIDTRANS_CLIENT_KEY,
+      env: env.MIDTRANS_ENV === 'production' ? 'production' : 'sandbox'
+    });
+
+  } catch (e) {
     return json({
       status: r.status,
-      midtrans: j
+      rawResponse: text,
+      parseError: String(e)
     }, 502);
   }
-
-  return json({
-    token: j.token,
-    order,
-    clientKey: env.MIDTRANS_CLIENT_KEY,
-    env: env.MIDTRANS_ENV === 'production' ? 'production' : 'sandbox'
-  });
 }
