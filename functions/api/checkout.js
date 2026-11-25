@@ -13,7 +13,7 @@ export async function onRequestPost({ request, env }) {
     })
   });
   const j = await r.json();
-  if (!j.token) return json({ error: 'midtrans' }, 502);
+  if (!j.token) return json(j, 502);
   return json({ token: j.token, order, clientKey: env.MIDTRANS_CLIENT_KEY,
     env: env.MIDTRANS_ENV === 'production' ? 'production' : 'sandbox' });
 }
