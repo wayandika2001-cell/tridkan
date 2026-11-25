@@ -4,7 +4,7 @@ export async function onRequestPost({ request, env }) {
   let b = {}; try { b = await request.json(); } catch (e) {}
   const k = b.plan === 'tahunan' ? 'y' : 'm', pl = PLANS[k];
   const order = 'TRD-' + k + '-' + Date.now() + '-' + Math.random().toString(36).slice(2, 7);
-  const r = await fetch(base(env).app + '/snap/v1/transactions', {
+  const r = await fetch(base(env).api + '/snap/v1/transactions', {
     method: 'POST',
     headers: { 'content-type': 'application/json', accept: 'application/json', authorization: auth(env) },
     body: JSON.stringify({
