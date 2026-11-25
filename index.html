@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tridkan: ubah logo jadi 3D animasi</title>
+<meta name="description" content="Ubah logo PNG, JPG, WebP, atau SVG jadi 3D HD dengan animasi dan efek. Simpan sebagai PNG transparan atau video.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=DM+Sans:wght@400;500;700&display=swap">
+<style>
+:root{--bg:#f3f5f9;--card:#fff;--ink:#0f1a2e;--mute:#566277;--line:#d7deea;--acc:#2f55ff;--accink:#fff;--stage:#e4e9f3;--gold:#c77d00;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0c111b;--card:#151c2a;--ink:#eef2fa;--mute:#98a5ba;--line:#273146;--acc:#7b9bff;--accink:#0c111b;--stage:#101726;--gold:#ffc24d}}
+:root[data-theme="dark"]{--bg:#0c111b;--card:#151c2a;--ink:#eef2fa;--mute:#98a5ba;--line:#273146;--acc:#7b9bff;--accink:#0c111b;--stage:#101726;--gold:#ffc24d}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "DM Sans","Segoe UI",system-ui,sans-serif}
+h1,h2,h3{font-family:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;line-height:1.08;margin:0}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+nav{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
+.logo{font:800 24px "Bricolage Grotesque",sans-serif;letter-spacing:-.02em;color:var(--ink);text-decoration:none}
+.logo i{display:inline-block;width:14px;height:14px;background:var(--acc);margin-right:8px;box-shadow:4px 4px 0 var(--ink)}
+.hero{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:34px;align-items:center;padding:20px 0 56px}
+@media (max-width:900px){.hero{grid-template-columns:1fr}}
+h1{font-size:clamp(36px,5vw,58px);font-weight:800;letter-spacing:-.03em}
+.sub{color:var(--mute);font-size:18px;margin:16px 0 22px}
+.btn{display:inline-block;padding:12px 20px;border-radius:10px;border:1.5px solid var(--ink);background:transparent;color:var(--ink);font:700 15px "DM Sans",sans-serif;cursor:pointer}
+.btn.p{background:var(--acc);border-color:var(--acc);color:var(--accink)}
+.btn.s{padding:8px 14px;font-size:14px}
+.btn:focus-visible,summary:focus-visible,input:focus-visible,.chip:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.note{font-size:13px;color:var(--mute);margin:12px 0 0}
+.app{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+#stage{position:relative;height:clamp(340px,50vw,520px);background:var(--stage);touch-action:none;cursor:grab}
+#c{position:absolute;inset:0;width:100%;height:100%;display:block}
+#drop{position:absolute;left:12px;bottom:12px;font-size:12px;color:var(--mute);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:5px 10px;pointer-events:none}
+.pad{padding:14px 16px 4px}.pad h3{font-size:15px;margin-bottom:8px}.pad h3 span{color:var(--mute);font:400 13px "DM Sans",sans-serif;margin-left:6px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{padding:7px 13px;border-radius:99px;border:1.5px solid var(--line);background:transparent;color:var(--ink);font:500 14px "DM Sans",sans-serif;cursor:pointer}
+.chip.on{background:var(--acc);border-color:var(--acc);color:var(--accink)}
+.chip.lock{color:var(--mute)}.chip.lock:after{content:" Pro";color:var(--gold);font-weight:700;font-size:12px}
+.ctl{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:4px 18px;padding:12px 16px 0}
+.ctl label{font-size:12.5px;color:var(--mute);display:block}.ctl b{float:right;color:var(--ink)}
+.ctl input{width:100%;accent-color:var(--acc);margin:2px 0 6px}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:8px 16px 16px}
+.bar .btn{padding:9px 14px;font-size:14px}
+.bar label{font-size:13px;color:var(--mute);display:flex;align-items:center;gap:6px}
+.bar input[type=color]{width:30px;height:26px;padding:0;border:1px solid var(--line);background:none}
+.sp{flex:1}
+section{padding:52px 0;border-top:1px solid var(--line)}
+h2{font-size:clamp(28px,3.6vw,40px);font-weight:700;letter-spacing:-.02em;margin-bottom:26px}
+.plans{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;max-width:820px}
+@media (max-width:700px){.plans{grid-template-columns:1fr}}
+.plan{border:1.5px solid var(--line);border-radius:14px;padding:24px;background:var(--card)}
+.plan.pro{border-color:var(--acc)}
+.plan h3{font-size:22px}.pr{font:800 34px "Bricolage Grotesque",sans-serif;margin:8px 0}.pr small{font:400 14px "DM Sans",sans-serif;color:var(--mute)}
+.plan ul{padding-left:18px;margin:0 0 16px;color:var(--mute)}
+.plan .btn{display:block;width:100%;margin-top:8px}
+details{border-bottom:1px solid var(--line);padding:16px 0;max-width:760px}
+summary{cursor:pointer;font-weight:700;font-size:17px}
+details p{color:var(--mute);margin:10px 0 0}
+footer{border-top:1px solid var(--line);padding:26px 0 40px;color:var(--mute);font-size:14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.beta{font:700 11px "DM Sans",sans-serif;margin-left:8px;padding:2px 7px;border-radius:99px;background:var(--gold);color:var(--bg);vertical-align:4px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav><a class="logo" href="#"><i></i>Tridkan<small class="beta">beta</small></a><a class="btn s" id="badge" href="#harga">Lihat Pro</a></nav>
+<div class="hero">
+<div>
+<h1>Logo kamu, jadi 3D yang hidup.</h1>
+<p class="sub">Unggah logo (PNG, JPG, WebP, SVG, GIF), pilih animasi dan efek, lalu simpan sebagai PNG transparan atau video. Semuanya di browser, tanpa akun.</p>
+<button class="btn p" id="pick">Unggah gambar</button>
+<p class="note">Versi beta. Gambar tidak dikirim ke server.</p>
+</div>
+<div class="app">
+<div id="stage"><canvas id="c"></canvas><div id="drop">Seret gambar ke sini, atau tekan Ctrl+V</div></div>
+<div class="pad"><h3>Animasi<span id="cnt"></span></h3><div class="chips" id="chA"></div><h3 style="margin-top:14px">Efek</h3><div class="chips" id="chE"></div><h3 style="margin-top:14px">Preset</h3><div class="chips" id="chP"></div></div>
+<div class="ctl">
+<div><label for="dep">Ketebalan <b id="vD">18</b></label><input type="range" id="dep" min="2" max="60" value="18"></div>
+<div><label for="spd">Kecepatan <b id="vS">1</b></label><input type="range" id="spd" min="2" max="30" value="10"></div>
+<div><label for="dur">Durasi video <b id="vR">5</b> dtk</label><input type="range" id="dur" min="5" max="10" value="5"></div>
+</div>
+<div class="bar">
+<input type="file" id="file" accept="image/png,image/jpeg,image/webp,image/svg+xml,image/gif,image/avif,image/bmp" hidden>
+<button class="btn" id="pick2">Ganti gambar</button>
+<label><input type="color" id="bgc" value="#e4e9f3" aria-label="Warna latar">Latar</label>
+<label><input type="color" id="sc" value="#ffb020" aria-label="Warna sisi">Warna sisi</label>
+<label>Ukuran PNG <select id="xs"><option value="1">1x</option><option value="2">2x (Pro)</option><option value="4">4x (Pro)</option></select></label>
+<label><input type="checkbox" id="tr" checked>Ekspor transparan</label>
+<span class="sp"></span>
+<button class="btn" id="rec">Rekam video</button>
+<button class="btn p" id="save">Simpan PNG</button>
+</div>
+</div>
+</div></div>
+
+<section id="harga"><div class="wrap">
+<h2>Gratis untuk mencoba, Pro untuk hasil maksimal</h2>
+<div class="plans">
+<div class="plan"><h3>Gratis</h3><p class="pr">Rp0</p><ul><li>5 animasi dan efek</li><li>Mendukung PNG, JPG, WebP, SVG, GIF</li><li>Simpan PNG transparan, tanpa tanda air</li></ul></div>
+<div class="plan pro"><h3>Pro</h3><p class="pr">Rp10.000<small> /bulan</small></p><ul><li>Semua 20 animasi dan efek terbuka</li><li>Kualitas HD 2K</li><li>Rekam video 5 sampai 10 detik (WebM)</li><li>Hapus latar otomatis untuk JPG dan foto</li><li>Warna sisi 3D sesukamu</li><li>Preset siap pakai dan tombol Acak</li><li>Ukuran PNG sampai 4x</li></ul>
+<button class="btn p" data-plan="bulanan">Berlangganan bulanan</button>
+<button class="btn" data-plan="tahunan">Tahunan Rp99.000 (hemat 17%)</button>
+<p class="note" id="demo">Mode demo: pembayaran belum tersambung, tombol ini langsung mengaktifkan Pro untuk pengujian.</p></div>
+</div></div></section>
+
+<section id="faq"><div class="wrap"><h2>Tanya jawab</h2>
+<details><summary>Gambar apa yang hasilnya paling bagus?</summary><p>Logo dengan latar transparan dan bentuk yang jelas. Aktifkan HD (Pro) untuk tepi yang lebih halus.</p></details>
+<details><summary>Apakah gambar saya disimpan di server?</summary><p>Tidak. Gambar hanya dibaca di browser kamu dan hilang saat halaman ditutup.</p></details>
+<details><summary>Boleh untuk keperluan komersial?</summary><p>Boleh, selama kamu punya hak atas logo yang diunggah.</p></details>
+</div></section>
+<div class="wrap"><footer><span>© 2026 Tridkan</span><span>Ubah logo PNG jadi 3D, langsung di browser.</span></footer></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)},stage=$('stage'),cv=$('c');
+var E=[['spin','Putar',1,'a'],['float','Melayang',1,'a'],['sway','Goyang',1,'a'],['pulse','Denyut',0,'a'],['swing','Ayun',0,'a'],['bounce','Pantul',0,'a'],['flip','Jungkir',0,'a'],['twist','Spiral',0,'a'],['wave','Gelombang',0,'a'],['explode','Rakit',0,'a'],['breathe','Napas tebal',0,'a'],['glitch','Glitch',0,'a'],['orbit','Orbit kamera',0,'a'],
+['shadow','Bayangan',1,'e'],['shine','Kilau',1,'e'],['sparks','Partikel',0,'e'],['neon','Neon',0,'e'],['rainbow','Pelangi',0,'e'],['holo','Hologram',0,'e'],['gold','Emas',0,'e'],['hd','HD 2K',0,'e'],['bgrm','Hapus latar otomatis',0,'e'],['side','Warna sisi',0,'e']];
+var PR=[['Sinematik',['orbit','shine','shadow','float']],['Neon Club',['neon','rainbow','sparks','pulse','spin']],['Emas mewah',['gold','shine','swing','shadow']],['Hologram',['holo','glitch','float','sparks','wave']],['Acak',0]],sideC=[1,0.69,0.13],KEEP=['hd','bgrm','side'];
+var LIVE=true,SANDBOX=true,on={spin:1,float:1,shadow:1},pro=false,lic='';
+try{if(!LIVE)pro=localStorage.getItem('tridkan-pro')==='1';lic=localStorage.getItem('tridkan-lic')||''}catch(e){}
+var renderer=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true,preserveDrawingBuffer:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio||1,2));renderer.setClearColor(0,0);renderer.outputEncoding=THREE.sRGBEncoding;
+var scene=new THREE.Scene(),cam=new THREE.PerspectiveCamera(36,1,0.1,3000),pivot=new THREE.Group(),layers=[],img=null,avg='#2f55ff';
+scene.add(pivot);
+var rotX=-0.18,rotY=0.5,dist=215,T=0,last=performance.now(),drag=false,gl=0;
+function resize(){var w=stage.clientWidth,h=stage.clientHeight;if(!w||!h)return;renderer.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()}
+addEventListener('resize',resize);
+var sh=document.createElement('canvas');sh.width=sh.height=128;
+(function(){var x=sh.getContext('2d'),g=x.createRadialGradient(64,64,0,64,64,64);g.addColorStop(0,'rgba(0,0,0,.45)');g.addColorStop(1,'rgba(0,0,0,0)');x.fillStyle=g;x.fillRect(0,0,128,128)})();
+var floor=new THREE.Mesh(new THREE.PlaneGeometry(110,110),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(sh),transparent:true,depthWrite:false}));
+floor.rotation.x=-Math.PI/2;floor.position.y=-68;scene.add(floor);
+var N=1200,pp=new Float32Array(N*3),i;
+for(i=0;i<N;i++){var a=Math.random()*6.283,b=Math.acos(2*Math.random()-1),r=75+Math.random()*60;pp[i*3]=r*Math.sin(b)*Math.cos(a);pp[i*3+1]=r*Math.cos(b);pp[i*3+2]=r*Math.sin(b)*Math.sin(a)}
+var pg=new THREE.BufferGeometry();pg.setAttribute('position',new THREE.BufferAttribute(pp,3));
+var pts=new THREE.Points(pg,new THREE.PointsMaterial({size:2.2,color:0xffffff,transparent:true,opacity:.85,blending:THREE.AdditiveBlending,depthWrite:false}));scene.add(pts);
+function prep(size){
+ var m=Math.max(img.width,img.height),k=Math.min(1,size/m)||1,w=Math.max(1,Math.round(img.width*k)),h=Math.max(1,Math.round(img.height*k));
+ var c=document.createElement('canvas');c.width=w;c.height=h;var x=c.getContext('2d');x.drawImage(img,0,0,w,h);
+ var d=x.getImageData(0,0,w,h),p=d.data,al=false,j,R=0,G=0,B=0,n=0;
+ for(j=3;j<p.length;j+=4){if(p[j]<250){al=true;break}}
+ if(!al){var bR=p[0],bG=p[1],bB=p[2],tol=on.bgrm&&pro;
+  for(j=0;j<p.length;j+=4){if(tol?(Math.abs(p[j]-bR)+Math.abs(p[j+1]-bG)+Math.abs(p[j+2]-bB)<90):(p[j]>238&&p[j+1]>238&&p[j+2]>238))p[j+3]=0}x.putImageData(d,0,0)}
+ for(j=0;j<p.length;j+=64){if(p[j+3]>128){R+=p[j];G+=p[j+1];B+=p[j+2];n++}}
+ if(n)avg='rgb('+Math.round(R/n)+','+Math.round(G/n)+','+Math.round(B/n)+')';
+ return {c:c,w:w,h:h};
+}
+function build(){
+ if(!img)return;
+ layers.forEach(function(l){pivot.remove(l);l.userData.m1.dispose();l.userData.m2.dispose()});layers=[];
+ var t=prep(on.hd&&pro?2048:1024),tex=new THREE.CanvasTexture(t.c);
+ tex.encoding=THREE.sRGBEncoding;tex.anisotropy=renderer.capabilities.getMaxAnisotropy();tex.minFilter=THREE.LinearMipmapLinearFilter;
+ if(build.t)build.t.dispose();build.t=tex;
+ var ac=document.createElement('canvas');ac.width=t.w;ac.height=t.h;var ax=ac.getContext('2d'),sd0=t.c.getContext('2d').getImageData(0,0,t.w,t.h).data,ad=ax.createImageData(t.w,t.h),z;
+ for(z=0;z<sd0.length;z+=4){ad.data[z+1]=sd0[z+3];ad.data[z+3]=255}ax.putImageData(ad,0,0);
+ if(build.a)build.a.dispose();var am=build.a=new THREE.CanvasTexture(ac);
+ var k=100/Math.max(t.w,t.h),L=on.hd&&pro?80:52,geo=build.g||(build.g=new THREE.PlaneGeometry(1,1));
+ for(var q=0;q<L;q++){
+  var u=q/(L-1)-0.5,edge=q===0||q===L-1,m=new THREE.Mesh(geo,new THREE.MeshBasicMaterial({map:tex,alphaTest:0.5,side:THREE.DoubleSide}));
+  m.scale.set(t.w*k*(q===0?-1:1),t.h*k,1);m.userData={u:u,b:edge?1:0.5,gx:0,m1:m.material,m2:new THREE.MeshBasicMaterial({alphaMap:am,alphaTest:0.5,side:THREE.DoubleSide})};pivot.add(m);layers.push(m);
+ }
+ pts.material.color.set(avg);
+ if(on.neon)stage.firstChild.style.filter='drop-shadow(0 0 14px '+avg+')';
+}
+function demo(){
+ var c=document.createElement('canvas');c.width=c.height=256;var x=c.getContext('2d'),g=x.createLinearGradient(0,0,256,256);
+ g.addColorStop(0,'#2f55ff');g.addColorStop(1,'#ff4fa3');x.fillStyle=g;
+ x.beginPath();x.moveTo(60,10);x.lineTo(196,10);x.quadraticCurveTo(246,10,246,60);x.lineTo(246,196);x.quadraticCurveTo(246,246,196,246);x.lineTo(60,246);x.quadraticCurveTo(10,246,10,196);x.lineTo(10,60);x.quadraticCurveTo(10,10,60,10);x.fill();
+ x.fillStyle='#fff';x.beginPath();x.arc(128,128,74,0,6.2832);x.fill();
+ x.fillStyle='#ffb020';x.beginPath();x.moveTo(140,64);x.lineTo(92,138);x.lineTo(122,138);x.lineTo(114,192);x.lineTo(166,114);x.lineTo(134,114);x.closePath();x.fill();
+ img=c;build();
+}
+function loadFile(f){if(!f)return;var u=URL.createObjectURL(f),im=new Image();
+ im.onload=function(){URL.revokeObjectURL(u);
+  if(/svg/.test(f.type)||!im.naturalWidth){var w=im.naturalWidth||1024,h=im.naturalHeight||1024,q=2048/Math.max(w,h),c=document.createElement('canvas');c.width=Math.round(w*q);c.height=Math.round(h*q);c.getContext('2d').drawImage(im,0,0,c.width,c.height);img=c}else img=im;
+  build()};
+ im.onerror=function(){$('drop').textContent='File tidak bisa dibaca. Coba PNG lain.'};im.src=u}
+function gate(){if(pro)return true;$('harga').scrollIntoView();return false}
+function preset(p){if(!gate())return;
+ var ids=p[1]||E.filter(function(e){return KEEP.indexOf(e[0])<0&&Math.random()<0.3}).map(function(e){return e[0]});
+ if(!ids.length)ids=['spin'];
+ E.forEach(function(e){if(KEEP.indexOf(e[0])<0)on[e[0]]=0});ids.forEach(function(k){on[k]=1});
+ cv.style.filter=on.neon?'drop-shadow(0 0 14px '+avg+')':'';chips()}
+function chips(){
+ var nf=0;$('chA').textContent='';$('chE').textContent='';
+ E.forEach(function(e){var b=document.createElement('button');b.className='chip'+(on[e[0]]?' on':'')+(!e[2]&&!pro?' lock':'');b.textContent=e[1];b.setAttribute('aria-pressed',!!on[e[0]]);
+  if(e[2])nf++;
+  b.onclick=function(){if(!e[2]&&!gate())return;on[e[0]]=!on[e[0]];
+   if(e[0]==='neon')stage.firstChild.style.filter=on.neon?'drop-shadow(0 0 14px '+avg+')':'';
+   if(e[0]==='hd'||e[0]==='bgrm')build();chips()};$(e[3]==='a'?'chA':'chE').appendChild(b)});
+ var ph=$('chP');ph.textContent='';PR.forEach(function(p){var b=document.createElement('button');b.className='chip'+(pro?'':' lock');b.textContent=p[0];b.onclick=function(){preset(p)};ph.appendChild(b)});
+ $('cnt').textContent=pro?'Pro: semua terbuka':nf+' gratis, sisanya Pro';
+ $('badge').textContent=pro?'Pro aktif':'Lihat Pro';
+}
+function setPro(v){pro=v;try{if(!LIVE)localStorage.setItem('tridkan-pro',v?'1':'0')}catch(e){}
+ if(!v){['twist','wave','explode','breathe','glitch','shine','sparks','neon','orbit','hd'].forEach(function(k){on[k]=0});stage.firstChild.style.filter=''}
+ chips();build()}
+var msg=function(t){$('demo').textContent=t};
+function claim(o,n){n=n||0;if(n>40){msg('Pembayaran belum terkonfirmasi. Simpan nomor pesanan '+o+' dan hubungi kami.');return}
+ fetch('/api/status?order='+encodeURIComponent(o)).then(function(r){return r.json()}).then(function(j){
+  if(j.token){lic=j.token;try{localStorage.setItem('tridkan-lic',lic)}catch(e){}setPro(true);msg('Pro aktif. Terima kasih!');scrollTo({top:0})}
+  else{msg('Menunggu konfirmasi pembayaran...');setTimeout(function(){claim(o,n+1)},3000)}
+ }).catch(function(){setTimeout(function(){claim(o,n+1)},4000)})}
+function snapLoad(key,env,cb){if(window.snap)return cb();var s=document.createElement('script');s.src=(env==='production'?'https://app.midtrans.com':'https://app.sandbox.midtrans.com')+'/snap/snap.js';s.setAttribute('data-client-key',key);s.onload=cb;s.onerror=function(){msg('Gagal memuat pembayaran. Coba lagi.')};document.head.appendChild(s)}
+function checkout(plan,btn){
+ btn.disabled=true;msg('Menyiapkan pembayaran...');
+ fetch('/api/checkout',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({plan:plan})}).then(function(r){return r.json()}).then(function(j){
+  if(!j.token)throw 0;
+  snapLoad(j.clientKey,j.env,function(){btn.disabled=false;window.snap.pay(j.token,{onSuccess:function(){claim(j.order)},onPending:function(){claim(j.order)},onError:function(){msg('Pembayaran gagal. Coba lagi.')}})})
+ }).catch(function(){btn.disabled=false;msg('Pembayaran belum bisa dimulai. Coba lagi nanti.')})}
+document.querySelectorAll('[data-plan]').forEach(function(b){b.onclick=function(){
+ if(!LIVE){setPro(true);msg('Pro aktif (mode demo). Semua animasi dan efek terbuka.');scrollTo({top:0});return}
+ checkout(b.getAttribute('data-plan'),b)}});
+$('pick').onclick=$('pick2').onclick=function(){$('file').click()};
+$('file').onchange=function(){loadFile($('file').files[0])};
+stage.addEventListener('dragover',function(e){e.preventDefault()});
+stage.addEventListener('drop',function(e){e.preventDefault();loadFile(e.dataTransfer.files[0])});
+$('bgc').oninput=function(e){stage.style.background=e.target.value};
+$('dep').oninput=function(){$('vD').textContent=this.value};
+$('spd').oninput=function(){$('vS').textContent=(this.value/10).toFixed(1)};
+$('dur').oninput=function(){$('vR').textContent=this.value};
+$('sc').oninput=function(){var h=this.value;sideC=[parseInt(h.substr(1,2),16)/255,parseInt(h.substr(3,2),16)/255,parseInt(h.substr(5,2),16)/255]};
+$('xs').onchange=function(){if(!pro&&this.value!=='1'){this.value='1';gate()}};
+addEventListener('paste',function(e){var it=[].slice.call((e.clipboardData&&e.clipboardData.items)||[]).filter(function(x){return x.type.indexOf('image')===0})[0];if(it)loadFile(it.getAsFile())});
+function save(name,b){if(!b)return;claude.use('downloads').then(function(d){if(!d){$('drop').textContent='Simpan tidak tersedia di tampilan ini';return}d.save({filename:name,data:b}).catch(function(){})}).catch(function(){})}
+$('save').onclick=function(){
+ var k=pro?+$('xs').value:1;if(k>1)renderer.setSize(stage.clientWidth*k,stage.clientHeight*k,false);
+ if(!$('tr').checked)renderer.setClearColor(new THREE.Color($('bgc').value),1);
+ renderer.render(scene,cam);
+ var o=document.createElement('canvas');o.width=cv.width;o.height=cv.height;var x=o.getContext('2d');x.drawImage(cv,0,0);
+ 
+ renderer.setClearColor(0,0);resize();
+ o.toBlob(function(b){save('logo-3d.png',b)},'image/png');
+};
+$('rec').onclick=function(){
+ if(!gate())return;var btn=this;
+ try{renderer.setClearColor(new THREE.Color($('bgc').value),1);
+  var mr=new MediaRecorder(cv.captureStream(30),{mimeType:'video/webm'}),ch=[];
+  mr.ondataavailable=function(e){ch.push(e.data)};
+  mr.onstop=function(){renderer.setClearColor(0,0);btn.disabled=false;btn.textContent='Rekam video';save('logo-3d.webm',new Blob(ch,{type:'video/webm'}))};
+  var n=+$('dur').value,iv;btn.disabled=true;btn.textContent='Merekam '+n+' dtk...';
+  iv=setInterval(function(){n--;if(n>0)btn.textContent='Merekam '+n+' dtk...'},1000);
+  mr.start();setTimeout(function(){clearInterval(iv);mr.stop()},$('dur').value*1000);
+ }catch(e){renderer.setClearColor(0,0);$('drop').textContent='Perekaman tidak didukung di browser ini'}
+};
+var pd=0,pt={},lx=0,ly=0;
+stage.addEventListener('pointerdown',function(e){pt[e.pointerId]=[e.clientX,e.clientY];drag=true;lx=e.clientX;ly=e.clientY;stage.setPointerCapture(e.pointerId)});
+function up(e){delete pt[e.pointerId];drag=false;pd=0}
+stage.addEventListener('pointerup',up);stage.addEventListener('pointercancel',up);
+stage.addEventListener('pointermove',function(e){
+ if(!pt[e.pointerId])return;pt[e.pointerId]=[e.clientX,e.clientY];var ks=Object.keys(pt);
+ if(ks.length>1){var a=pt[ks[0]],b=pt[ks[1]],d=Math.hypot(a[0]-b[0],a[1]-b[1]);if(pd)dist=Math.min(600,Math.max(80,dist*pd/d));pd=d;return}
+ rotY+=(e.clientX-lx)*0.008;if(!on.orbit)rotX=Math.max(-1.5,Math.min(1.5,rotX+(e.clientY-ly)*0.008));lx=e.clientX;ly=e.clientY});
+stage.addEventListener('wheel',function(e){e.preventDefault();dist=Math.min(600,Math.max(80,dist*(1+e.deltaY*0.001)))},{passive:false});
+if(matchMedia('(prefers-reduced-motion: reduce)').matches){on.spin=0;on.float=0}
+function loop(){
+ requestAnimationFrame(loop);
+ var now=performance.now(),dt=Math.min(0.05,(now-last)/1000),s=$('spd').value/10,f=on;last=now;T+=dt*s;
+ if(f.spin&&!drag)rotY+=dt*s*0.9;
+ if(f.orbit){rotX=-0.18+Math.sin(T*0.7)*0.4;dist=215+Math.sin(T*0.5)*40}
+ var fy=(f.float?Math.sin(T*1.7)*5:0)+(f.bounce?Math.abs(Math.sin(T*2.6))*16:0),ph=(T*0.45)%1,fx=f.flip&&ph<0.3?Math.pow(ph/0.3,2)*(3-2*ph/0.3)*6.2832:0;
+ pivot.position.y=fy;pivot.scale.setScalar(f.pulse?1+Math.sin(T*3.2)*0.06:1);
+ pivot.rotation.set(rotX+fx,rotY+(f.swing?Math.sin(T*1.5)*0.8:0),f.sway?Math.sin(T*1.8)*0.14:0);
+ floor.visible=!!f.shadow;floor.material.opacity=1-fy*0.04;floor.scale.setScalar(1-fy*0.012);
+ pts.visible=!!f.sparks;pts.rotation.y=T*0.35;
+ var D=+$('dep').value*(f.breathe?0.55+0.45*Math.sin(T*2.2):1)*(f.explode?1+2.4*(1+Math.sin(T*1.7)):1);
+ if(f.glitch&&Math.random()<0.04)layers.forEach(function(l,j){l.userData.gx=(Math.random()-0.5)*(j%3?4:16)});
+ else if(!f.glitch||Math.random()<0.25)layers.forEach(function(l){l.userData.gx=0});
+ var sw=((T*0.7)%1.5)-0.75,fl=f.holo&&Math.random()<0.06?0.45:1,tc=build.tc||(build.tc=new THREE.Color());
+ for(var j=0;j<layers.length;j++){
+  var l=layers[j],u=l.userData.u;
+  l.position.z=u*D;
+  l.position.x=(f.wave?Math.sin(T*3+u*8)*8:0)+l.userData.gx;
+  l.rotation.z=f.twist?u*Math.sin(T*1.3)*2.4:0;
+  var c=(l.userData.b+(f.shine?Math.max(0,1-Math.abs(u-sw)*6)*1.2:0))*fl,R=c,G=c,B=c;
+  if(f.gold){G*=0.78;B*=0.32}
+  if(f.holo){R*=0.35;G*=1.05;B*=1.3}
+  if(f.rainbow){tc.setHSL((T*0.15+u*0.7)%1,0.8,0.62);R*=tc.r*1.8;G*=tc.g*1.8;B*=tc.b*1.8}
+  var sd=f.side&&l.userData.b<1;l.material=sd?l.userData.m2:l.userData.m1;
+  if(sd)l.material.color.setRGB(sideC[0]*c*1.5,sideC[1]*c*1.5,sideC[2]*c*1.5);else l.material.color.setRGB(R,G,B);
+ }
+ cam.position.set(0,0,dist);cam.lookAt(0,0,0);renderer.render(scene,cam);
+}
+chips();resize();demo();loop();setTimeout(resize,300);
+if(LIVE){msg(SANDBOX?'Beta: pembayaran masih mode uji, tidak ada uang yang ditagih.':'Pembayaran lewat Midtrans: QRIS, e-wallet, transfer bank.');
+ if(lic)fetch('/api/verify?token='+encodeURIComponent(lic)).then(function(r){return r.json()}).then(function(j){if(j.pro)setPro(true);else{try{localStorage.removeItem('tridkan-lic')}catch(e){}}}).catch(function(){})}
+})();
+</script>
+</body>
+</html>
